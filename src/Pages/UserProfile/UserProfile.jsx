@@ -5,10 +5,12 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBirthdayCake, faPen } from "@fortawesome/free-solid-svg-icons";
 import moment from "moment";
 import LeftSidebar from "../../components/LeftSidebar/LeftSidebar";
-import Avatar from "../../components/Avatar/Avatar";
+//import Avatar from "../../components/Avatar/Avatar";
 import EditProfileForm from "./EditProfileForm";
 import ProfileBio from "./ProfileBio";
 import "./UsersProfile.css";
+import Avatar from "react-avatar-edit"
+
 
 
 
@@ -19,10 +21,14 @@ const UserProfile = ({ slideIn, handleSlideIn }) => {
   const currentUser = useSelector((state) => state.currentUserReducer);
   const [Switch, setSwitch] = useState(false);
 
-  // const handleUpdateProfile = () =>{
-  //   alert("Profile Updated")
-  // }
-
+  const [src,setSrc]=useState(null)
+  const [preview,setPreview]=useState(null)
+   const onClose=(view)=>{
+    setPreview(view);
+}
+const onCrop =(view)=>{
+    setPreview(view);
+}
 
   return (
     <div className="home-container-1">
@@ -31,9 +37,15 @@ const UserProfile = ({ slideIn, handleSlideIn }) => {
         <section>
           <div className="user-details-container">
             <div className="user-details">
-              <Avatar /*onClick={handleUpdateProfile} */backgroundColor="purple" color="white" fontSize="50px"  px="40px" py="30px">
-              {currentProfile?.name.charAt(0).toUpperCase()}
-              </Avatar>
+              {preview === null?<Avatar
+                className="changes"
+                disable={false}
+                 width={400}
+                 height={300}
+                 onClose={onClose}
+                 onCrop={onCrop}
+                 src={src}/>:
+                 <img src={preview}/>}
               <div className="user-name">
                 <h1>{currentProfile?.name}</h1>
                 <p>

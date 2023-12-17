@@ -9,7 +9,7 @@ import Avatar from "../../components/Avatar/Avatar"
 import DisplayAnswer from "./DisplayAnswer";
 import './Question.css';
 
-import { postAnswer , deleteQuestion , voteQuestion } from '../../actions/question';
+import { postAnswer , voteQuestion , deleteQuestion } from '../../actions/question';
 
 
 const QuestionDetails = () => {
@@ -176,7 +176,7 @@ const url = "http://localhost:3000"
                 }
                 <section className='post-ans-container'>
                     <h3>Your Answer</h3>
-                    <form  onSubmit={ (e) =>{handlePostAns(e,question.answer.length)}}>
+                    <form  onSubmit={ (e) =>{handlePostAns(e, question.answer.length)}}>
                         <textarea name="" id="" cols="30" rows="10" onChange={e => setAnswer(e.target.value)}></textarea><br/>
                         <input type="Submit" className="post-ans-btn" value="Post Your Answer" />
                     </form>
